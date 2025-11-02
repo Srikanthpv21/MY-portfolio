@@ -8,6 +8,16 @@
 </head>
 <body>
 
+    <div id="permission-modal">
+        <div class="modal-content">
+            <p>Do you want to see the Srikanth P V profile?</p>
+            <div class="modal-buttons">
+                <button id="btn-yes">Yes</button>
+                <button id="btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <nav>
@@ -38,21 +48,45 @@ I'm particularly interested in full-stack web development and cloud technologies
         </div>
     </section>
 
+    <section id="skills" class="skills">
+        <div class="container">
+            <h3>My Skills</h3>
+            <div class="skill-row">
+                <div class="skill-badge">HTML5</div>
+                <div class="skill-badge">CSS3</div>
+                <div class="skill-badge">JavaScript</div>
+                <div class="skill-badge">React</div>
+                <div class="skill-badge">Node.js</div>
+                <div class="skill-badge">MongoDB</div>
+                <div class="skill-badge">Express</div>
+                <div class="skill-badge">MERN Stack</div>
+                <div class="skill-badge">Git & GitHub</div>
+                <div class="skill-badge">Cloud (AWS/GCP)</div>
+            </div>
+        </div>
+    </section>
+
     <section id="projects" class="projects">
         <div class="container">
             <h3>My Projects</h3>
-            <div class="project-grid">
+            <div class="project-row">
                 
-                <div class="project-card">
-                    <h4>Edugram</h4>
-                    <p>Edugram is a social learning network for students and teachers. Think “LinkedIn, but campus-first”: profiles, posts, reactions, discussions, and resource sharing — built on the MERN stack (MongoDB, Express, React, Node.js).</p>
-                    <a href="https://edugram-five.vercel.app/signin" target="_blank">View Project</a>
+                <div class="project-tile">
+                    <img src="https://placehold.co/300x170/E50914/white?text=Edugram" alt="Edugram Project Preview">
+                    <div class="tile-info">
+                        <h4>Edugram</h4>
+                        <p>A social learning network for students and teachers, built on the MERN stack.</p>
+                        <a href="https://edugram-five.vercel.app/signin" target="_blank">View Project</a>
+                    </div>
                 </div>
                 
-                <div class="project-card">
-                    <h4>InvestIQ</h4>
-                    <p>A Startup Success Predictor, using ML algorithm and react and MongoDB</p>
-                    <a href="[Link to your project or GitHub repo]" target="_blank">Currently Working on Project</a>
+                <div class="project-tile">
+                    <img src="https://placehold.co/300x170/E50914/white?text=InvestIQ" alt="InvestIQ Project Preview">
+                    <div class="tile-info">
+                        <h4>InvestIQ</h4>
+                        <p>A Startup Success Predictor, using ML algorithms, React, and MongoDB.</p>
+                        <a href="[Link to your project or GitHub repo]" target="_blank">Currently Working on Project</a>
+                    </div>
                 </div>
 
             </div>
@@ -63,9 +97,9 @@ I'm particularly interested in full-stack web development and cloud technologies
         <div class="container">
             <h3>Get In Touch</h3>
             <p>I'm always open to discussing new projects or opportunities.</p>
-            <p>
-                <a href="mailto:srikanthpv25@gmail.com" class="contact-link">srikanthpv25@gmail.com</a>
-            </p>
+            
+            <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=srikanthpv25@gmail.com" class="contact-link" target="_blank">srikanthpv25@gmail.com</a></p>
+            
             <p>
                 <a href="https://www.linkedin.com/in/srikanthpvindia/" class="contact-link" target="_blank">LinkedIn</a>
                 &bull;
@@ -79,6 +113,58 @@ I'm particularly interested in full-stack web development and cloud technologies
             <p>&copy; 2025 Srikanth P V. All rights reserved.</p>
         </div>
     </footer>
+
+    <audio id="click-sound" preload="auto">
+        <source src="https://cdn.freesound.org/previews/51/51290_410080-lq.ogg" type="audio/ogg">
+        <source src="https://cdn.freesound.org/previews/51/51290_410080-lq.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const modal = document.getElementById('permission-modal');
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+        const clickSound = document.getElementById('click-sound');
+        
+        let isAudioEnabled = false;
+
+        async function playClickSound() {
+            try {
+                clickSound.currentTime = 0;
+                await clickSound.play();
+            } catch (err) {
+                console.log('Audio playback failed: ', err);
+            }
+        }
+
+        function createSparkle(e) {
+            let sparkle = document.createElement('span');
+            sparkle.classList.add('sparkle');
+            document.body.appendChild(sparkle);
+            sparkle.style.left = (e.clientX - sparkle.offsetWidth / 2) + 'px';
+            sparkle.style.top = (e.clientY - sparkle.offsetHeight / 2) + 'px';
+            setTimeout(() => {
+                sparkle.remove();
+            }, 800);
+        }
+
+        btnYes.addEventListener('click', async () => {
+            modal.style.display = 'none';
+            isAudioEnabled = true;
+            await playClickSound();
+        });
+
+        btnNo.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        document.addEventListener('click', async (e) => {
+            createSparkle(e);
+            if (isAudioEnabled && !modal.contains(e.target)) {
+                await playClickSound();
+            }
+        });
+    </script>
 
 </body>
 </html>
